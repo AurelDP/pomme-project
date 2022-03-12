@@ -36,6 +36,10 @@ export default {
 </script>
 
 <style scoped>
+nav {
+  z-index: 10;
+}
+
 .btn-circle {
   border-radius: 50px;
 }
