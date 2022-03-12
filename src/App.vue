@@ -1,27 +1,21 @@
 <template>
-  <NavBar />
-  <HeroVideo title="Traveling has never been easier" />
-  <Cards title="Products" />
+  <MainPage />
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
-import HeroVideo from './components/HeroVideo.vue'
-import Cards from './components/CardsSection.vue'
+import MainPage from './components/MainPage.vue'
 
 export default {
   name: 'App',
   components: {
-    NavBar,
-    HeroVideo,
-    Cards,
+    MainPage,
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

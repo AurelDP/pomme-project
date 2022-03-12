@@ -1,5 +1,5 @@
 <template>
-  <div class="hero-container d-flex align-items-center">
+  <header class="hero-container d-flex align-items-center">
     <div class="black-opacity"></div>
     <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" poster="../assets/poster.png">
       <source v-bind:src="video" type="video/mp4" />
@@ -7,7 +7,7 @@
     <div class="text-white">
       <h1 class="display-3 fw-bolder container">{{ title }}</h1>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
