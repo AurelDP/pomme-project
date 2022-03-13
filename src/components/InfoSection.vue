@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-secondary bg-opacity-25">
+  <div class="bg-secondary bg-opacity-10">
     <form class="container py-5">
       <h3 class="fw-bold mb-4">Your information</h3>
       <div class="mb-3">
@@ -40,8 +40,9 @@ export default {
 }
 
 input {
+  border: 0;
   border-radius: 0;
-  border-bottom: 3px solid gray;
+  border-bottom: 2px solid gray;
 }
 
 .btn-primary {

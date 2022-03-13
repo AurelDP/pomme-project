@@ -13,9 +13,6 @@ export default {
         { title: "MocBook Pro 13''", description: "Power to go.", url: require("../assets/Mac13.png"), price: 1699, quantity: 305 },
         { title: "PomPods 3rd gen", description: "All-new with spatial audio.", url: require("../assets/AirPds.png"), price: 239, quantity: 567 },
         { title: "ePad Air", description: "Powerful. Colourful. Wonderful.", url: require("../assets/iPad air.png"), price: 779, quantity: 298 },
-      ],
-      userCart: [
-        { title: "ePhone 13", quantity: 5 },
       ]
     }
   }
