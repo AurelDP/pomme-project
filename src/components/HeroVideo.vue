@@ -29,7 +29,7 @@ export default {
 .hero-container {
   position: relative;
   background-color: black;
-  height: 100vh;
+  height: 95vh;
   overflow: hidden;
 }
 

@@ -1,14 +1,17 @@
 <template>
-  <MainPage />
+  <!--<MainPage />-->
+  <CartPage />
 </template>
 
 <script>
-import MainPage from './components/MainPage.vue'
+//import MainPage from './components/MainPage.vue'
+import CartPage from './components/CartPage.vue'
 
 export default {
   name: 'App',
   components: {
-    MainPage,
+    //MainPage,
+    CartPage,
   }
 }
 </script>

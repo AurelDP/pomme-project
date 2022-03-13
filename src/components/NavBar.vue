@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a href="#" class="navbar-brand">
         <img class="mb-1" src="../assets/white.png" width="25" height="25" alt="">
@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "NavBar"
+  name: "NavBar",
 }
 </script>
 
