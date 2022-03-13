@@ -26,13 +26,13 @@
 </template>
 
 <script>
-import CardsSection from './CardsSection.vue'
+import TemporaryDatabase from './TemporaryDatabase.vue'
 
 export default {
   name: "SelectionSection",
   data() {
     return {
-      cards: CardsSection.data().cards,
+      cards: TemporaryDatabase.data().cards,
       selectedProduct: null,
       quantity: 0
     }

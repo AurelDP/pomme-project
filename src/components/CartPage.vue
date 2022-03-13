@@ -3,6 +3,7 @@
   <Info />
   <hr class="mx-5 my-0">
   <Selection />
+  <hr class="mx-5 my-0">
   <Footer txt="© 2022 Copyright: pomme.com" />
 </template>
 
