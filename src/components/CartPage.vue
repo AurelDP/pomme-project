@@ -1,6 +1,8 @@
 <template>
   <NavBar />
   <Info />
+  <hr class="mx-5 my-0">
+  <Selection />
   <Footer txt="© 2022 Copyright: pomme.com" />
 </template>
 
@@ -8,6 +10,7 @@
 import NavBar from './NavBar.vue'
 import Footer from './FooterSection.vue'
 import Info from './InfoSection.vue'
+import Selection from './SelectionSection.vue'
 
 export default {
   name: "CartPage",
@@ -15,10 +18,15 @@ export default {
     NavBar,
     Footer,
     Info,
+    Selection,
   }
 }
 </script>
 
 <style scoped>
-
+hr {
+  height: 3px;
+  background-color: #2c3e50;
+  opacity: 1;
+}
 </style>
