@@ -1,18 +1,10 @@
 <template>
-  <!--<MainPage />-->
-  <CartPage />
+  <router-view />
 </template>
 
 <script>
-//import MainPage from './components/MainPage.vue'
-import CartPage from './components/CartPage.vue'
-
 export default {
   name: 'App',
-  components: {
-    //MainPage,
-    CartPage,
-  }
 }
 </script>
 

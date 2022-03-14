@@ -18,7 +18,7 @@
 
 <script>
 import Card from './CardComponent.vue'
-import TemporaryDatabase from './TemporaryDatabase.vue'
+import TemporaryDatabase from '../TemporaryDatabase.vue'
 
 export default {
   name: "CardsSection",

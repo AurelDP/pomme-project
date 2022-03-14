@@ -1,7 +1,7 @@
 <template>
   <header class="hero-container d-flex align-items-center">
     <div class="black-opacity"></div>
-    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" poster="../assets/poster.png">
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" poster="../../assets/poster.png">
       <source v-bind:src="video" type="video/mp4" />
     </video>
     <div class="text-white">
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import video from '../assets/large.mp4'
+import video from '../../assets/large.mp4'
 export default {
   name: "HeroVideo",
   data() {
