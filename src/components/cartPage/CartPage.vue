@@ -1,9 +1,9 @@
 <template>
   <NavBar />
   <Info />
-  <Selection />
-  <hr class="mx-5 my-0">
-  <Products />
+  <Selection @newUserProduct="addNewUserProduct" v-bind:userProducts="cartUser" />
+  <hr v-if="cartUser.length > 0" class="mx-5 my-0">
+  <Products v-if="cartUser.length > 0" v-bind:userProducts="cartUser" />
   <Footer txt="© 2022 Copyright: pomme.com" />
 </template>
 
@@ -22,6 +22,16 @@ export default {
     Info,
     Selection,
     Products,
+  },
+  data() {
+    return {
+      cartUser: []
+    }
+  },
+  methods: {
+    addNewUserProduct(product) {
+      this.cartUser.push(product)
+    }
   }
 }
 </script>

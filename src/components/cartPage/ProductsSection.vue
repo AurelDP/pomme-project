@@ -1,7 +1,7 @@
 <template>
   <div class="container py-5">
     <h3 class="fw-bold mb-4">Your products</h3>
-    <div v-for="card in userCart" :key="card" class="bg-secondary bg-opacity-10 p-4 mb-3 d-flex justify-content-between">
+    <div v-for="card in userProducts" :key="card" class="bg-secondary bg-opacity-10 p-4 mb-3 d-flex justify-content-between">
       <b class="m-0">{{ card.title }}</b>
       <p class="m-0"><b>Quantity:</b> {{ card.quantity }}</p>
     </div>
@@ -10,14 +10,10 @@
 </template>
 
 <script>
-import SelectionSection from './SelectionSection.vue'
-
 export default {
   name: "ProductsSection",
-  data() {
-    return {
-      userCart: SelectionSection.data().userCart,
-    }
+  props: {
+    userProducts: Object,
   }
 }
 </script>

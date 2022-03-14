@@ -10,12 +10,17 @@
         </select>
       </div>
       <div class="col-12 col-md-4 col-sm-6 mb-3">
-        <label v-if="selectedProduct" class="form-label fw-bolder">Quantity (max: {{ selectedProduct.quantity }})</label>
+        <label v-if="selectedProduct" class="form-label fw-bolder">Quantity (max: {{
+            selectedProduct.quantity
+          }})</label>
         <label v-else class="form-label fw-bolder">Quantity</label>
-        <input v-if="selectedProduct" type="number" class="form-control" placeholder="Product quantity" min="1" v-bind:max="selectedProduct.quantity" @change="onQuantityChange($event)" required>
-        <input v-else type="number" class="form-control" placeholder="Product quantity (choose a product)" required disabled>
+        <input v-if="selectedProduct" type="number" class="form-control" placeholder="Product quantity" min="1"
+               v-bind:max="selectedProduct.quantity" @change="onQuantityChange($event)" required>
+        <input v-else type="number" class="form-control" placeholder="Product quantity (choose a product)" required
+               disabled>
       </div>
-      <div class="col-12 col-md-4 col-sm-6 mb-3 px-5 py-3 bg-secondary bg-opacity-10 d-flex justify-content-between align-items-center">
+      <div
+          class="col-12 col-md-4 col-sm-6 mb-3 px-5 py-3 bg-secondary bg-opacity-10 d-flex justify-content-between align-items-center">
         <label class="form-label fw-bolder m-0">Price</label>
         <p v-if="quantity !== 0 && selectedProduct" class="m-0">$ {{ selectedProduct.price * quantity }}</p>
         <p v-else class="m-0">$ 0</p>
@@ -33,10 +38,12 @@ export default {
   data() {
     return {
       cards: TemporaryDatabase.data().cards,
-      userCart: [],
       selectedProduct: null,
       quantity: 0
     }
+  },
+  props: {
+    userProducts: Object,
   },
   methods: {
     onSelectChange(event) {
@@ -48,14 +55,14 @@ export default {
     },
 
     addProduct(e) {
-      let el = this.userCart.find(element => element.title === this.selectedProduct.title);
+      let el = this.userProducts.find(element => element.title === this.selectedProduct.title);
 
       if (el !== undefined)
-        el.quantity += this.quantity;
+        el.quantity = +(el.quantity) + +(this.quantity);  // +() is used to convert String to Integer (ex: 5+5 = 10 and not 55)
       else
-        this.userCart.push({title: this.selectedProduct.title, quantity: this.quantity});
+        this.$emit('newUserProduct', {title: this.selectedProduct.title, quantity: this.quantity});
 
-      console.log(this.userCart)
+      console.log(this.userProducts)
       e.target.reset();
       this.quantity = 0;
       e.preventDefault();
