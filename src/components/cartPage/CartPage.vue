@@ -4,7 +4,7 @@
   <Selection @newUserProduct="addNewUserProduct" v-bind:userProducts="cartUser" />
   <hr v-if="cartUser.length > 0" class="mx-5 my-0">
   <Products v-if="cartUser.length > 0" v-bind:userProducts="cartUser" />
-  <Footer txt="© 2022 Copyright: pomme.com" />
+  <Footer />
 </template>
 
 <script>

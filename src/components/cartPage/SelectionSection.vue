@@ -10,12 +10,10 @@
         </select>
       </div>
       <div class="col-12 col-md-4 col-sm-6 mb-3">
-        <label v-if="selectedProduct" class="form-label fw-bolder">Quantity (max: {{
-            selectedProduct.quantity
-          }})</label>
+        <label v-if="selectedProduct" class="form-label fw-bolder">Quantity (max: {{ selectedProduct.quantity }})</label>
         <label v-else class="form-label fw-bolder">Quantity</label>
         <input v-if="selectedProduct" type="number" class="form-control" placeholder="Product quantity" min="1"
-               v-bind:max="selectedProduct.quantity" @change="onQuantityChange($event)" required>
+               v-bind:max="selectedProduct.quantity" v-model="quantity" required>
         <input v-else type="number" class="form-control" placeholder="Product quantity (choose a product)" required
                disabled>
       </div>
@@ -48,10 +46,6 @@ export default {
   methods: {
     onSelectChange(event) {
       this.selectedProduct = this.cards.find(element => element.title === event.target.value);
-    },
-
-    onQuantityChange(event) {
-      this.quantity = event.target.value;
     },
 
     addProduct(e) {

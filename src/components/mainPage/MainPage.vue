@@ -3,7 +3,7 @@
   <HeroVideo title="Traveling has never been easier" />
   <Cards title="Products" id="products"/>
   <About id="aboutus"/>
-  <Footer txt="© 2022 Copyright: pomme.com" />
+  <Footer />
 </template>
 
 <script>
