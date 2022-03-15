@@ -1,6 +1,9 @@
 <template>
   <div class="container my-5">
-    <h3 class="fw-bold mb-2">{{ title }}</h3>
+    <div class="d-flex mb-2">
+      <h3 class="fw-bold">{{ title }}</h3>
+      <input type="search" class="form-control" placeholder="Search product" v-model="searchValue"/>
+    </div>
     <div class="row">
       <Card
           v-for="c in cards"
@@ -31,11 +34,22 @@ export default {
   data() {
     return {
       cards: TemporaryDatabase.data().cards,
+      searchValue: ""
+    }
+  },
+  watch: {
+    searchValue: function(val) {
+      if (val === "")
+        this.cards = TemporaryDatabase.data().cards
+      else
+        this.cards = this.cards.filter(c => c.title.toLowerCase().includes(val.toLowerCase()))
     }
   }
 }
 </script>
 
 <style scoped>
-
+.form-control {
+  margin-left: 20px;
+}
 </style>
