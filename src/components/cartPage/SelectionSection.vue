@@ -59,6 +59,7 @@ export default {
       console.log(this.userProducts)
       e.target.reset();
       this.quantity = 0;
+      this.selectedProduct = null;
       e.preventDefault();
     }
   }
