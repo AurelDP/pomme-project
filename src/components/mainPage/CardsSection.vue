@@ -39,9 +39,8 @@ export default {
   },
   watch: {
     searchValue: function(val) {
-      if (val === "")
-        this.cards = TemporaryDatabase.data().cards
-      else
+      this.cards = TemporaryDatabase.data().cards
+      if (val !== "")
         this.cards = this.cards.filter(c => c.title.toLowerCase().includes(val.toLowerCase()))
     }
   }
