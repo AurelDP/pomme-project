@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import NavBar from '../NavBar.vue'
-import Footer from '../FooterSection.vue'
-import Info from './InfoSection.vue'
-import Selection from './SelectionSection.vue'
-import Products from './ProductsSection.vue'
+import NavBar from '../components/NavBar.vue'
+import Footer from '../components/FooterSection.vue'
+import Info from '../components/cartPage/InfoSection.vue'
+import Selection from '../components/cartPage/SelectionSection.vue'
+import Products from '../components/cartPage/ProductsSection.vue'
 
 export default {
   name: "CartPage",

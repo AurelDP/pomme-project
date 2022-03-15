@@ -1,11 +1,11 @@
 import {createWebHistory, createRouter} from 'vue-router'
-import MainPage from '../components/mainPage/MainPage.vue'
-import CartPage from '../components/cartPage/CartPage.vue'
+import MainPage from '../views/MainPage.vue'
+import CartPage from '../views/CartPage.vue'
 import Error404 from '../components/ErrorPage404.vue'
 
 const routes = [
-    {path: '/mainpage', alias: '/', name: "Mainpage", component: MainPage},
-    {path: '/cartpage', name: "Shopping cart", component: CartPage},
+    {path: '/main', alias: '/', name: "Main", component: MainPage},
+    {path: '/cart', name: "Shopping cart", component: CartPage},
     {path: "/:catchAll(.*)*", component: Error404},
 ]
 

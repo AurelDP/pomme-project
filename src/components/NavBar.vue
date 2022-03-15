@@ -10,29 +10,43 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav">
-          <router-link class="nav-link" :to="{path: 'mainpage', hash: '#products'}">Products</router-link>
-          <router-link class="nav-link" :to="{path: 'mainpage', hash: '#aboutus'}">About us</router-link>
+          <router-link class="nav-link" :to="{path: 'main', hash: '#products'}">Products</router-link>
+          <router-link class="nav-link" :to="{path: 'main', hash: '#aboutus'}">About us</router-link>
         </div>
         <div class="navbar-nav ms-auto">
-          <button type="button" class="btn btn-light btn-sm mx-2 px-4 btn-circle">Sign in</button>
-          <router-link to='/cartpage'>
+          <button v-if="currentRoutePath !== '/cart'" type="button" class="btn btn-light btn-sm mx-2 px-4 btn-circle" data-bs-toggle="modal" data-bs-target="#signModal">Sign in</button>
+          <router-link v-else to="/">
+            <button type="button" class="btn btn-light btn-sm mx-2 px-4 btn-circle">Log out</button>
+          </router-link>
+          <router-link to='/cart' v-if="currentRoutePath !== '/cart'">
             <button type="button" class="btn btn-dark btn-sm btn-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart"
-                   viewBox="0 0 16 16">
-                <path
-                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-              </svg>
+              <i class="bi bi-cart-fill"></i>
             </button>
           </router-link>
         </div>
       </div>
     </div>
   </nav>
+  <ModalPage id="signModal"/>
 </template>
 
 <script>
+import ModalPage from '../views/ModalPage.vue'
 export default {
   name: "NavBar",
+  components: {
+    ModalPage,
+  },
+  methods: {
+    open() {
+      console.log("ok")
+    }
+  },
+  computed: {
+    currentRoutePath() {
+      return this.$route.path
+    }
+  }
 }
 </script>
 
