@@ -1,9 +1,24 @@
+# server
+
+## Project setup
+```
+cd server
+npm install
+```
+
+___
+
 # client
 
 ## Project setup
 ```
+cd server
 npm install
 ```
+
+___
+
+# How to run server and client?
 
 ### Compiles and hot-reloads for development
 ```
