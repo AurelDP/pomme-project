@@ -9,9 +9,9 @@
           v-for="c in cards"
           :key="c"
           class="col-12 col-lg-3 col-md-4 col-sm-6"
-          :title="c.name"
+          :title="c.title"
           :description="c.description"
-          :url="require('../../assets/' + c.url)"
+          :url="require('../../assets/' + c.imagename)"
           :price="c.price"
           :quantity="c.quantity"
       />

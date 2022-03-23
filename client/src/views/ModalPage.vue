@@ -4,10 +4,12 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <div id="sign-in-button" v-bind:class="{ 'selected-button': selected === 'Login' }" @click="changeLoginRegister">
+          <div id="sign-in-button" v-bind:class="{ 'selected-button': selected === 'Login' }"
+               @click="changeLoginRegister">
             <p class="fw-bolder m-0">Login</p>
           </div>
-          <div id="sign-up-button" v-bind:class="{ 'selected-button': selected === 'Register' }" @click="changeLoginRegister">
+          <div id="sign-up-button" v-bind:class="{ 'selected-button': selected === 'Register' }"
+               @click="changeLoginRegister">
             <p class="fw-bolder m-0">Register</p>
           </div>
         </div>
@@ -15,12 +17,13 @@
         <form @submit="launchRequest">
 
           <div class="modal-body" v-if="selected === 'Login'">
-            <label for="username-login" class="form-label">Username</label>
+            <label for="email-login" class="form-label">Email</label>
             <div class="input-group">
-              <span class="input-group-text" id="username-login">
-                <i class="bi bi-tag-fill"></i>
+              <span class="input-group-text" id="email-login">
+                <i class="bi bi-envelope-fill"></i>
               </span>
-              <input type="text" class="form-control" placeholder="Your username" aria-describedby="username-login" required>
+              <input type="text" class="form-control" placeholder="Your email" aria-describedby="email-login"
+                     v-model="loginEmail" required>
             </div>
 
             <label for="password-login" class="form-label">Password</label>
@@ -28,17 +31,19 @@
               <span class="input-group-text" id="password-login">
                 <i class="bi bi-key-fill"></i>
               </span>
-              <input type="password" class="form-control" placeholder="Your password" aria-describedby="password-login" required>
+              <input type="password" class="form-control" placeholder="Your password" aria-describedby="password-login"
+                     v-model="loginPassword" required>
             </div>
           </div>
 
           <div class="modal-body" v-else>
-            <label for="email-register" class="form-label">Username</label>
+            <label for="email-register" class="form-label">Email</label>
             <div class="input-group">
               <span class="input-group-text" id="email-register">
                 <i class="bi bi-envelope-fill"></i>
               </span>
-              <input type="text" class="form-control" placeholder="Your email" aria-describedby="email-register" required>
+              <input type="text" class="form-control" placeholder="Your email" aria-describedby="email-register"
+                     v-model="registerEmail" required>
             </div>
 
             <label for="username-register" class="form-label">Username</label>
@@ -46,7 +51,8 @@
               <span class="input-group-text" id="username-register">
                 <i class="bi bi-tag-fill"></i>
               </span>
-              <input type="text" class="form-control" placeholder="Your username" aria-describedby="username-register" required>
+              <input type="text" class="form-control" placeholder="Your username" aria-describedby="username-register"
+                     v-model="registerUsername" required>
             </div>
 
             <label for="password-register" class="form-label">Password</label>
@@ -54,13 +60,21 @@
               <span class="input-group-text" id="password-register">
                 <i class="bi bi-key-fill"></i>
               </span>
-              <input type="password" class="form-control" placeholder="Your password" aria-describedby="password-register" required>
+              <input type="password" class="form-control" placeholder="Your password"
+                     aria-describedby="password-register" v-model="registerPassword" required>
+            </div>
+            <div v-if="isEmailUsed" class="mt-3 alert alert-danger" role="alert">
+              This email is already used
             </div>
           </div>
 
           <div class="modal-footer">
-            <button v-if="selected === 'Login'" type="submit" class="btn btn-outline-primary btn-sm btn-lg btn-block">Login</button>
-            <button v-if="selected === 'Register'" type="submit" class="btn btn-outline-primary btn-sm btn-lg btn-block">Register</button>
+            <button v-if="selected === 'Login'" type="submit" class="btn btn-outline-primary btn-sm btn-lg btn-block">
+              Login
+            </button>
+            <button v-if="selected === 'Register'" type="submit"
+                    class="btn btn-outline-primary btn-sm btn-lg btn-block">Register
+            </button>
           </div>
         </form>
 
@@ -70,29 +84,51 @@
 </template>
 
 <script>
+const BASE_URL = "http://localhost:8081/";
+
 export default {
   name: "ModalPage",
   data() {
     return {
-      selected: "Login"
+      selected: "Login",
+      loginPassword: "",
+      loginEmail: "",
+      registerUsername: "",
+      registerPassword: "",
+      registerEmail: "",
+      isEmailUsed: false,
     }
   },
   methods: {
     changeLoginRegister() {
       if (this.selected === "Login")
-        this.selected = "Register"
+        this.selected = "Register";
       else
-        this.selected = "Login"
+        this.selected = "Login";
     },
 
     launchRequest(e) {
       if (this.selected === "Login")
-        console.log("Launch login request")
-      else
-        console.log("Launch register request")
-      document.getElementsByClassName("fade")[0].click()
-      e.target.reset()
-      e.preventDefault()
+        console.log("Launch login request");
+      else {
+        fetch(BASE_URL + "users/checkEmailAlreadyUsed/" + this.registerEmail)
+            .then(res => res.json())
+            .then(res => {
+              console.log('res', res);
+              if (!res) {
+                document.getElementsByClassName("fade")[0].click();
+                e.target.reset();
+              } else
+                this.isEmailUsed = true;
+            })
+      }
+      e.preventDefault();
+    }
+  },
+  watch: {
+    registerEmail: function() {
+      if (this.isEmailUsed)
+        this.isEmailUsed = false;
     }
   }
 }

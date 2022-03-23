@@ -15,7 +15,8 @@
     "vue": "^3.2.31",
     "vue-js-modal": "^2.0.1",
     "vue-route": "^1.5.1",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vue3-cookies": "^1.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

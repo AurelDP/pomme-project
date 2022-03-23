@@ -11,7 +11,6 @@ const getAllProducts = async () => {
 
     try {
         const pgResp = await client.query(sqlQuery);
-        console.log(pgResp.rows);
         client.end();
         return pgResp.rows;
     } catch(err) {
