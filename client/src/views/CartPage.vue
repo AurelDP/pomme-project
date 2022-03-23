@@ -1,10 +1,19 @@
 <template>
-  <NavBar />
-  <Info />
-  <Selection @newUserProduct="addNewUserProduct" v-bind:userProducts="cartUser" />
-  <hr v-if="cartUser.length > 0" class="mx-5 my-0">
-  <Products v-if="cartUser.length > 0" v-bind:userProducts="cartUser" />
-  <Footer />
+  <NavBar/>
+  <div v-if="!this.$cookies.get('email')">
+    <div class="container">
+      <div class="alert alert-danger text-center mt-5">
+        <strong>You are not logged in</strong>
+      </div>
+    </div>
+  </div>
+  <div v-else>
+    <Info/>
+    <Selection @newUserProduct="addNewUserProduct" v-bind:userProducts="cartUser"/>
+    <hr v-if="cartUser.length > 0" class="mx-5 my-0">
+    <Products v-if="cartUser.length > 0" v-bind:userProducts="cartUser"/>
+  </div>
+  <Footer class="fixed-bottom"/>
 </template>
 
 <script>

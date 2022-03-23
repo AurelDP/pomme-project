@@ -14,11 +14,13 @@
           <router-link class="nav-link" :to="{path: 'main', hash: '#aboutus'}">About us</router-link>
         </div>
         <div class="navbar-nav ms-auto">
-          <button v-if="currentRoutePath !== '/cart'" type="button" class="btn btn-light btn-sm mx-2 px-4 btn-circle" data-bs-toggle="modal" data-bs-target="#signModal">Sign in</button>
-          <router-link v-else to="/">
+          <button v-if="!isCookieStored" type="button" class="btn btn-light btn-sm mx-2 px-4 btn-circle"
+                  data-bs-toggle="modal" data-bs-target="#signModal">Sign in
+          </button>
+          <router-link v-else to="/" @click="delCookie">
             <button type="button" class="btn btn-light btn-sm mx-2 px-4 btn-circle">Log out</button>
           </router-link>
-          <router-link to='/cart' v-if="currentRoutePath !== '/cart'">
+          <router-link to='/cart' v-if="currentRoutePath !== '/cart' && isCookieStored">
             <button type="button" class="btn btn-dark btn-sm btn-circle">
               <i class="bi bi-cart-fill"></i>
             </button>
@@ -27,25 +29,42 @@
       </div>
     </div>
   </nav>
-  <ModalPage id="signModal"/>
+  <ModalPage id="signModal" @onLogin="checkCookie"/>
 </template>
 
 <script>
 import ModalPage from '../views/ModalPage.vue'
+
 export default {
   name: "NavBar",
   components: {
     ModalPage,
   },
-  methods: {
-    open() {
-      console.log("ok")
+  data() {
+    return {
+      isCookieStored: false,
     }
+  },
+  methods: {
+    delCookie() {
+      this.$cookies.remove('email');
+      this.checkCookie();
+    },
+
+    checkCookie() {
+      if (this.$cookies.get('email'))
+        this.isCookieStored = true;
+      else
+        this.isCookieStored = false;
+    },
   },
   computed: {
     currentRoutePath() {
       return this.$route.path
-    }
+    },
+  },
+  created() {
+    this.checkCookie();
   }
 }
 </script>

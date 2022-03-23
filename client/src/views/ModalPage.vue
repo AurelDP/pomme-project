@@ -34,6 +34,13 @@
               <input type="password" class="form-control" placeholder="Your password" aria-describedby="password-login"
                      v-model="loginPassword" required>
             </div>
+
+            <div v-if="passwordIncorrect" class="alert alert-danger mt-3" role="alert">
+              The password is incorrect
+            </div>
+            <div v-if="emailIncorrect" class="alert alert-danger mt-3" role="alert">
+              The email is incorrect
+            </div>
           </div>
 
           <div class="modal-body" v-else>
@@ -66,6 +73,9 @@
             <div v-if="isEmailUsed" class="mt-3 alert alert-danger" role="alert">
               This email is already used
             </div>
+            <div v-if="!isEmailValid" class="mt-3 alert alert-danger" role="alert">
+              This email format is not valid
+            </div>
           </div>
 
           <div class="modal-footer">
@@ -97,6 +107,9 @@ export default {
       registerPassword: "",
       registerEmail: "",
       isEmailUsed: false,
+      isEmailValid: true,
+      passwordIncorrect: false,
+      emailIncorrect: false,
     }
   },
   methods: {
@@ -109,26 +122,86 @@ export default {
 
     launchRequest(e) {
       if (this.selected === "Login")
-        console.log("Launch login request");
-      else {
-        fetch(BASE_URL + "users/checkEmailAlreadyUsed/" + this.registerEmail)
+
+        fetch(BASE_URL + "users/loginUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: this.loginEmail,
+            password: this.loginPassword
+          })
+        })
             .then(res => res.json())
-            .then(res => {
-              console.log('res', res);
-              if (!res) {
+            .then(data => {
+              if (data.error === "password incorrect")
+                this.passwordIncorrect = true;
+              else if (data.error === "email not found")
+                this.emailIncorrect = true;
+              else {
+                this.$cookies.set("email", data.success);
                 document.getElementsByClassName("fade")[0].click();
                 e.target.reset();
-              } else
-                this.isEmailUsed = true;
+                this.$emit("onLogin");
+              }
             })
+
+      else {
+
+        if (!/\S+@\S+\.\S+/.test(this.registerEmail))
+          this.isEmailValid = false;
+
+        if (this.isEmailValid)
+          fetch(BASE_URL + "users/checkEmailAlreadyUsed/" + this.registerEmail)
+              .then(res => res.json())
+              .then(res => {
+                if (!res) {
+
+                  fetch(BASE_URL + "users/registerUser", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                      email: this.registerEmail,
+                      username: this.registerUsername,
+                      password: this.registerPassword
+                    })
+                  })
+                      .then(res => res.json())
+                      .then(res => {
+                        if (res.success) {
+                          this.selected = "Login";
+                          document.getElementsByClassName("fade")[0].click();
+                          e.target.reset();
+                        }
+                      })
+                      .catch(err => console.log(err));
+                } else
+                  this.isEmailUsed = true;
+              })
       }
       e.preventDefault();
     }
   },
   watch: {
-    registerEmail: function() {
+    registerEmail: function () {
       if (this.isEmailUsed)
         this.isEmailUsed = false;
+
+      if (!this.isEmailValid)
+        this.isEmailValid = true;
+    },
+
+    loginPassword: function () {
+      if (this.passwordIncorrect)
+        this.passwordIncorrect = false;
+    },
+
+    loginEmail: function () {
+      if (this.emailIncorrect)
+        this.emailIncorrect = false;
     }
   }
 }
