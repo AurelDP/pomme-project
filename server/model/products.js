@@ -24,12 +24,12 @@ const getAllProducts = async () => {
 const addAllProducts = async () => {
     const client = utility.tryToConnect();
     const sqlQuery = `INSERT INTO ${TABLE_PATH}
-        VALUES (1, 'ePhone 13', 'Your new superpower', 'require("../assets/13.png")', 949, 187),
-        (2, 'ePhone 13 Pro', 'Oh. So. Pro.', 'require("../assets/13Pro.png")', 1399, 153),
-        (3, 'MocBook Air', 'Power. It''s in the Air.', 'require("../assets/MacAir.png")', 1299, 432),
-        (4, 'MocBook Pro 13''''', 'Power to go.', 'require("../assets/Mac13.png\")', 1699, 305),
-        (5, 'PomPods 3rd gen', 'All-new with spatial audio.', 'require("../assets/AirPds.png\")', 239, 567),
-        (6, 'ePad Air', 'Powerful. Colourful. Wonderful.', 'require("../assets/iPad air.png\")', 779, 298)`;
+        VALUES (1, 'ePhone 13', 'Your new superpower', '13.png', 949, 187),
+        (2, 'ePhone 13 Pro', 'Oh. So. Pro.', '13Pro.png', 1399, 153),
+        (3, 'MocBook Air', 'Power. It''s in the Air.', 'MacAir.png', 1299, 432),
+        (4, 'MocBook Pro 13''''', 'Power to go.', 'Mac13.png', 1699, 305),
+        (5, 'PomPods 3rd gen', 'All-new with spatial audio.', 'AirPds.png', 239, 567),
+        (6, 'ePad Air', 'Powerful. Colourful. Wonderful.', 'iPad air.png', 779, 298)`;
 
     try {
         const pgResp = await client.query(sqlQuery);

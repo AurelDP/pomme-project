@@ -11,7 +11,7 @@
           class="col-12 col-lg-3 col-md-4 col-sm-6"
           :title="c.name"
           :description="c.description"
-          :url="c.url"
+          :url="require('../../assets/' + c.url)"
           :price="c.price"
           :quantity="c.quantity"
       />
