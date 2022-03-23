@@ -4,12 +4,12 @@
       <h3 class="fw-bold">{{ title }}</h3>
       <input type="search" class="form-control" placeholder="Search product" v-model="searchValue"/>
     </div>
-    <div class="row">
+    <div class="row" v-if="cards.length > 0">
       <Card
           v-for="c in cards"
           :key="c"
           class="col-12 col-lg-3 col-md-4 col-sm-6"
-          :title="c.title"
+          :title="c.name"
           :description="c.description"
           :url="c.url"
           :price="c.price"
@@ -23,6 +23,8 @@
 import Card from './CardComponent.vue'
 import TemporaryDatabase from '../TemporaryDatabase.vue'
 
+const BASE_URL = "http://localhost:8081/";
+
 export default {
   name: "CardsSection",
   props: {
@@ -33,16 +35,25 @@ export default {
   },
   data() {
     return {
-      cards: TemporaryDatabase.data().cards,
-      searchValue: ""
+      cards: [],
+      searchValue: "",
     }
   },
   watch: {
-    searchValue: function(val) {
+    searchValue: function (val) {
       this.cards = TemporaryDatabase.data().cards
       if (val !== "")
         this.cards = this.cards.filter(c => c.title.toLowerCase().includes(val.toLowerCase()))
     }
+  },
+  methods: {
+    async fetchCards() {
+      const response = await fetch(BASE_URL + "products/getAllProducts");
+      this.cards = await response.json();
+    }
+  },
+  created() {
+    this.fetchCards();
   }
 }
 </script>

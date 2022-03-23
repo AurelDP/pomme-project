@@ -1,4 +1,4 @@
-# server
+# Server
 
 ## Project setup
 ```
@@ -8,7 +8,7 @@ npm install
 
 ___
 
-# client
+# Client
 
 ## Project setup
 ```
@@ -20,18 +20,31 @@ ___
 
 # How to run server and client?
 
+## Server
+
+### Run the server
+```
+cd server
+npx nodemon
+```
+
+## Client
+
 ### Compiles and hot-reloads for development
 ```
+cd client
 npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
+cd client
 npm run build
 ```
 
 ### Lints and fixes files
 ```
+cd client
 npm run lint
 ```
 

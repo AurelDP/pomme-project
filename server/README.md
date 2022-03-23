@@ -2,22 +2,14 @@
 
 ## Project setup
 ```
+cd server
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Run the server
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+cd server
+npx nodemon
 ```
 
 ### Customize configuration
