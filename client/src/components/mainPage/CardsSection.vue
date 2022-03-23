@@ -42,7 +42,7 @@ export default {
     searchValue: function (val) {
       this.fetchCards().then(() => {
         if (val !== "") {
-          this.cards = this.cards.filter(card => card.name.toLowerCase().includes(val.toLowerCase()));
+          this.cards = this.cards.filter(card => card.title.toLowerCase().includes(val.toLowerCase()));
         }
       });
     }
