@@ -21,7 +21,6 @@
 
 <script>
 import Card from './CardComponent.vue'
-import TemporaryDatabase from '../TemporaryDatabase.vue'
 
 const BASE_URL = "http://localhost:8081/";
 
@@ -41,9 +40,11 @@ export default {
   },
   watch: {
     searchValue: function (val) {
-      this.cards = TemporaryDatabase.data().cards
-      if (val !== "")
-        this.cards = this.cards.filter(c => c.title.toLowerCase().includes(val.toLowerCase()))
+      this.fetchCards().then(() => {
+        if (val !== "") {
+          this.cards = this.cards.filter(card => card.name.toLowerCase().includes(val.toLowerCase()));
+        }
+      });
     }
   },
   methods: {
