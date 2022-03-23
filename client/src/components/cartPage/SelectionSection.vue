@@ -29,13 +29,13 @@
 </template>
 
 <script>
-import TemporaryDatabase from '../TemporaryDatabase.vue'
+const BASE_URL = "http://localhost:8081/";
 
 export default {
   name: "SelectionSection",
   data() {
     return {
-      cards: TemporaryDatabase.data().cards,
+      cards: [],
       selectedProduct: null,
       quantity: 0
     }
@@ -61,7 +61,15 @@ export default {
       this.quantity = 0;
       this.selectedProduct = null;
       e.preventDefault();
+    },
+
+    async fetchCards() {
+      const response = await fetch(BASE_URL + "products/getAllProducts");
+      this.cards = await response.json();
     }
+  },
+  created() {
+    this.fetchCards();
   }
 }
 </script>
