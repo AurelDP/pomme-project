@@ -21,8 +21,25 @@ async function loginUser(req, res) {
     res.send(result);
 }
 
+async function updateUser(req, res) {
+    const user = req.body;
+
+    const result = await users.updateUser(user);
+    res.send({result: result});
+}
+
+async function getUserInfo(req, res) {
+    const user = req.body;
+
+    const result = await users.getUserInfo(user);
+    res.send({result: result});
+}
+
 module.exports = {
     checkEmailAlreadyUsed,
     registerUser,
-    loginUser
+    loginUser,
+    updateUser,
+    getUserInfo
+
 }

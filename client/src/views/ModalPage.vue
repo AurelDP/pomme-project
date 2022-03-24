@@ -143,6 +143,10 @@ export default {
                 this.$cookies.set("email", data.success);
                 document.getElementsByClassName("fade")[0].click();
                 e.target.reset();
+                this.loginPassword = "";
+                this.loginEmail = "";
+                this.passwordIncorrect = false;
+                this.emailIncorrect = false;
                 this.$emit("onLogin");
               }
             })
@@ -173,6 +177,11 @@ export default {
                       .then(res => {
                         if (res.success) {
                           this.selected = "Login";
+                          this.registerEmail = "";
+                          this.registerUsername = "";
+                          this.registerPassword = "";
+                          this.isEmailUsed = false;
+                          this.isEmailValid = true;
                           document.getElementsByClassName("fade")[0].click();
                           e.target.reset();
                         }

@@ -21,7 +21,7 @@ const checkEmailAlreadyUsed = async email => {
         }
         client.end();
         return isEmailUsed;
-    } catch(err) {
+    } catch (err) {
         console.log(err.stack);
         client.end();
         return null;
@@ -38,7 +38,7 @@ const registerUser = async user => {
         const pgResp = await client.query(sqlQuery);
         client.end();
         return "success";
-    } catch(err) {
+    } catch (err) {
         console.log(err.stack);
         client.end();
         return "error";
@@ -62,15 +62,47 @@ const loginUser = async user => {
             else
                 return {error: "password incorrect"};
         }
-    } catch(err) {
+    } catch (err) {
         console.log(err.stack);
         client.end();
         return "error";
     }
 }
 
+const updateUser = async (user, email) => {
+    const client = utility.tryToConnect();
+    const sqlQuery = `UPDATE ${TABLE_PATH} SET address = '${user.address}', creditname = '${user.creditname}', creditnumber = '${user.creditnumber}', expirationdate = '${user.expirationdate}' WHERE email = '${user.email}'`;
+
+    try {
+        const pgResp = await client.query(sqlQuery);
+        client.end();
+        return "success";
+    } catch (err) {
+        console.log(err.stack);
+        client.end();
+        return "error";
+    }
+}
+
+const getUserInfo = async (email) => {
+    const client = utility.tryToConnect();
+    const sqlQuery = `SELECT * FROM ${TABLE_PATH} WHERE email = '${email.email}'`;
+
+    try {
+        const pgResp = await client.query(sqlQuery);
+        client.end();
+        return pgResp.rows[0];
+    } catch (err) {
+        console.log(err.stack);
+        client.end();
+        return null;
+    }
+}
+
 module.exports = {
     checkEmailAlreadyUsed,
     registerUser,
-    loginUser
+    loginUser,
+    updateUser,
+    getUserInfo
 }
