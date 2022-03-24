@@ -5,16 +5,37 @@
       <b class="m-0">{{ card.title }}</b>
       <p class="m-0"><b>Quantity:</b> {{ card.quantity }}</p>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm px-5 mt-3">Place the order</button>
+    <button type="button" class="btn btn-primary btn-sm px-5 mt-3" @click="buyProducts">Place the order</button>
   </div>
 </template>
 
 <script>
+const BASE_URL = 'http://localhost:8081/';
 export default {
   name: "ProductsSection",
   props: {
     userProducts: Object,
-  }
+  },
+  methods: {
+    async buyProducts() {
+      fetch(BASE_URL + 'buyhistory/addProducts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.$cookies.get('email'),
+          userProducts: this.userProducts,
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            this.$emit('resetUserProducts');
+          }
+        });
+    },
+  },
 }
 </script>
 

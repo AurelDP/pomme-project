@@ -56,7 +56,6 @@ export default {
       else
         this.$emit('newUserProduct', {title: this.selectedProduct.title, quantity: this.quantity});
 
-      console.log(this.userProducts)
       e.target.reset();
       this.quantity = 0;
       this.selectedProduct = null;
