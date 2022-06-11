@@ -1,11 +1,13 @@
 const { Client } = require('pg');
 
+// The login information below is not confidential because the project is a student project
 const config = {
-    user: 'Aurelien_demo_db_connection',
+    user: 'Aurelien',
     host: 'db.bit.io',
-    database: 'bitdotio',
-    password: '3F6eA_4SgRPtgsSDPZqvehWYFnR8F',
-    port: 5432
+    database: 'Aurelien/PommeProject',
+    password: 'v2_3rgvJ_XGwi6QkzU6Rhk9kpfmg4VHG',
+    port: 5432,
+    ssl: true,
 }
 
 const getPgClient = () => new Client(config);
