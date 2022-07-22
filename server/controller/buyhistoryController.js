@@ -1,4 +1,4 @@
-const buyhistory = require('../model/buyhistory');
+const buyhistory = require('../repository/buyhistory');
 
 async function getProducts(req, res) {
     const email = req.body;

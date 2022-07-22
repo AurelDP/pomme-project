@@ -1,4 +1,4 @@
-const users = require('../model/users');
+const users = require('../repository/users');
 
 async function checkEmailAlreadyUsed(req, res) {
     const email = req.params.email;
